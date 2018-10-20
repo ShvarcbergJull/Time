@@ -23,6 +23,6 @@ public:
 	bool operator >=(const Time& t) const;
 	bool operator <=(const Time& t) const;
 
-	Time operator +(int& n) const;
-	Time operator +(double& n) const;
+	Time operator +(const int& n) const;
+	Time operator +(const double& n) const;
 };
