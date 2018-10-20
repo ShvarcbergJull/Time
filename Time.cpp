@@ -139,15 +139,16 @@ bool Time::operator <=(const Time& t) const
 	return ((*this < t) || (*this == t));
 }
 
-Time Time::operator +(int& n) const
+Time Time::operator +(const int& n) const
 {
 	int hour = h + n;
 
 	return Time(hour, m, s);
 }
 
-Time Time::operator +(double& n) const
+Time Time::operator +(const double& f) const
 {
+	double n = f;
 	int i = n, hour, min;
 	n -= i;
 	//n *= 10;
