@@ -56,7 +56,18 @@ int main()
 		if (c1 == c2)
 			cout << "t1 = t2" << endl;
 	}
+	
+	/*
+	char* p = new char[10];
 
+	cin.getline(p, 9);
+
+
+	Time pr(p);
+
+	cout << "String: " << pr << endl;
+
+	delete[] p;*/
 	system("pause");
 	return 0;
 }
