@@ -1,5 +1,8 @@
 #include <iostream>
+#include <cstring>
 #include "Time.h"
+
+using namespace std;
 
 Time::Time()
 {
@@ -27,6 +30,43 @@ Time::Time(int h1, int m1, int s1)
 	h = h1;
 	m = m1;
 	s = s1;
+}
+
+Time::Time(char* a)
+{
+	int* arr = new int[3];
+	int t = 0, i = 0, j = 0;
+
+	while (*a != 0)
+	{
+		if (*a == ':')
+		{
+			a++;
+			arr[i] = t;
+			i++;
+			t = 0;
+			j++;
+			continue;
+		}
+
+		if (!('0' < *a < '9'))
+		{
+			cout << "Error: Incorrect time entry" << endl;
+			break;
+		}
+
+		t = t * 10 + (*a - '0');
+		a++;
+		if (*a == 0)
+			s = t;
+	}
+	if (j == 0)
+	{
+		cout << "Error: Incorrect time entry" << endl;
+		return;
+	}
+	h = arr[0];
+	m = arr[1];
 }
 
 void Time::clockSet()
@@ -64,13 +104,17 @@ Time Time::operator -(const Time& t) const
 
 	if (sec < 0)
 	{
-		sec = 60 - sec;
+		sec = 60 + sec;
 		min--;
 	}
 	if (min < 0)
 	{
-		min = 60 - min;
+		min = 60 + min;
 		hour--;
+	}
+	while (hour < 0)
+	{
+		hour = 24 + hour;
 	}
 
 	Time res(hour, min, sec);
@@ -160,3 +204,15 @@ Time Time::operator +(const double& f) const
 
 	return res;
 }
+
+/*istream& operator >>(istream& in, Time& t)
+{
+	in >> t.h >> t.m >> t.s;
+	return in;
+}
+
+ostream& operator <<(ostream& out, const Time& t)
+{
+	out << t.h << ':' << t.m << ':' << t.s;
+	return out;
+}*/
